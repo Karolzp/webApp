@@ -5,6 +5,7 @@
 * Spring MVC
 * Spring Boot
 * Spring Data
+* Hibernate
 * H2 database
 * Maven
 * openCSV
