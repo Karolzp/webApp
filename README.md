@@ -9,3 +9,5 @@
 * H2 database
 * Maven
 * openCSV
+
+Tested with Postman
