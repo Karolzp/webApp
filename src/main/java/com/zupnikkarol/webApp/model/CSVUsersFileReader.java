@@ -3,6 +3,8 @@ package com.zupnikkarol.webApp.model;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -14,12 +16,14 @@ import java.util.List;
 
 public class CSVUsersFileReader implements UsersFileReader {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     private List<User> users = new ArrayList<>();
     private List<String[]> stringUsers = new ArrayList<>();
 
     /** Method getListOfUsersFromFile() upload csv file. File must be placed in resource folder.
         csv header should be like "first_name;last_name;birth_date;phone_no"
-        @param full file name
+        @param fileName full file name
         @return list of users
 */
     @Override
@@ -27,6 +31,7 @@ public class CSVUsersFileReader implements UsersFileReader {
         stringUsers = readUsersFile(fileName);
         stringUsers = validateReadFile(stringUsers);
         users = parseReadFileToArrayOfUsers(stringUsers);
+        log.info("{} file with user details read", fileName);
 
         return users;
     }
@@ -105,6 +110,7 @@ public class CSVUsersFileReader implements UsersFileReader {
 
             rows = csvReader.readAll();
         } catch (Exception e) {
+            log.warn("{} file with user details not read", fileName);
             e.printStackTrace();
         }
         return rows;

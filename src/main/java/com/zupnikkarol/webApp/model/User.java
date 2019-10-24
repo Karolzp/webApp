@@ -26,4 +26,9 @@ public class User {
 
     private Integer phoneNumber;
 
+    @Override
+    public String toString() {
+        return "First name: " + this.firstName + ", Last name: " + this.lastName;
+    }
+
 }
